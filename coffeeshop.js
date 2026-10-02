@@ -1,5 +1,3 @@
-
-
 const loader = document.getElementById('loader');
 
 setTimeout(function() {
@@ -303,10 +301,10 @@ checkoutBtn.addEventListener('click', function(e) {
     }
 
 
-    
 
 
-const backendOrderData = {
+
+const orderData = {
     items: cart.map(item => ({
         name: item.name,
         price: item.price,
@@ -323,7 +321,7 @@ fetch('http://localhost:3000/api/orders', {
     headers: {
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify(backendOrderData)
+    body: JSON.stringify(orderData)
 })
 .then(response => response.json())
 .then(data => {
@@ -332,6 +330,7 @@ fetch('http://localhost:3000/api/orders', {
 .catch(error => {
     console.error('❌ Error sending order:', error);
 });
+
 
 
 
@@ -482,8 +481,7 @@ fetch('http://localhost:3000/api/orders', {
         }
     }
     
-   
-    const confirmationData= {
+    const confirmationData = {
         items: cart.map(function(item) {
             return {
                 name: item.name,
@@ -558,17 +556,14 @@ fetch('http://localhost:3000/api/orders', {
 
 
 
-// ------------------------------------------------------------
-// STEP 12: "Order Now" button - scroll to menu
-// ------------------------------------------------------------
 
-// Find the "Order Now" button
+
 const orderBtn = document.querySelector('.order-btn');
 
-// If the button exists...
+
 if (orderBtn) {
 
-    // When it's clicked...
+  
     orderBtn.addEventListener('click', function(e) {
         // Stop the link from doing its default behavior
         e.preventDefault();
@@ -576,18 +571,14 @@ if (orderBtn) {
         // Find the menu section
         const menuSection = document.getElementById('menu');
 
-        // If the menu section exists...
         if (menuSection) {
-            // Scroll smoothly to the menu
+        
             menuSection.scrollIntoView({ behavior: 'smooth' });
             console.log('  → Scrolled to menu');
         }
     });
 }
 
-// ------------------------------------------------------------
-// STEP 13: "✅ Added!" feedback effect
-// ------------------------------------------------------------
 
 function showAddedFeedback(button) {
 
@@ -3147,7 +3138,7 @@ function showOrderConfirmation(orderData) {
     
     const paymentMethodEl = document.getElementById('confirmationPaymentMethod');
     if (paymentMethodEl) {
-        if (confirmationData.paymentMethod === 'cash') {
+        if (orderData.paymentMethod === 'cash') {
             paymentMethodEl.textContent = '💵 Cash at Counter';
         } else {
             paymentMethodEl.textContent = '💳 Card (Paid)';
@@ -3503,7 +3494,7 @@ setTimeout(function() {
         }
     });
     
-    // Keyboard controls
+ 
     document.addEventListener('keydown', function(e) {
         if (!modal.classList.contains('active')) return;
         
@@ -3512,9 +3503,7 @@ setTimeout(function() {
         if (e.key === 'ArrowLeft') prevImage();
     });
     
-    // ============================================================
-    // MAKE PRODUCT IMAGES CLICKABLE
-    // ============================================================
+
     
     document.querySelectorAll('.product-card').forEach(function(card) {
         const img = card.querySelector('.product-image img');
@@ -3525,7 +3514,7 @@ setTimeout(function() {
             img.addEventListener('click', function(e) {
                 e.stopPropagation();
                 
-                // Get product details
+
                 const name = card.querySelector('.product-info h3').textContent.trim();
                 const price = card.querySelector('.price').textContent.trim();
                 const desc = card.querySelector('.product-info p').textContent.trim();
@@ -3539,5 +3528,4 @@ setTimeout(function() {
     console.log('💡 Click any product image to open gallery');
     
 }, 500);
-
 
