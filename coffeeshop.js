@@ -303,6 +303,35 @@ checkoutBtn.addEventListener('click', function(e) {
     }
 
 
+    
+
+
+const backendOrderData = {
+    items: cart.map(item => ({
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity
+    })),
+    total: cartTotal,
+    paymentMethod: typeof selectedPaymentMethod !== 'undefined' ? selectedPaymentMethod : 'cash'
+};
+
+console.log('📤 Sending order to backend:', orderData);
+
+fetch('http://localhost:3000/api/orders', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(backendOrderData)
+})
+.then(response => response.json())
+.then(data => {
+    console.log('✅ Order saved in MongoDB:', data);
+})
+.catch(error => {
+    console.error('❌ Error sending order:', error);
+});
 
 
 
@@ -453,7 +482,8 @@ fetch('http://localhost:3000/api/orders', {
         }
     }
     
-    const orderData = {
+   
+    const confirmationData= {
         items: cart.map(function(item) {
             return {
                 name: item.name,
@@ -469,7 +499,7 @@ fetch('http://localhost:3000/api/orders', {
     
     setTimeout(function() {
         if (typeof showOrderConfirmation === 'function') {
-            showOrderConfirmation(orderData);
+            showOrderConfirmation(confirmationData);
         }
         
         cart = [];
@@ -3117,7 +3147,7 @@ function showOrderConfirmation(orderData) {
     
     const paymentMethodEl = document.getElementById('confirmationPaymentMethod');
     if (paymentMethodEl) {
-        if (orderData.paymentMethod === 'cash') {
+        if (confirmationData.paymentMethod === 'cash') {
             paymentMethodEl.textContent = '💵 Cash at Counter';
         } else {
             paymentMethodEl.textContent = '💳 Card (Paid)';
