@@ -365,7 +365,7 @@ fetch('https://ridouane-coffee.bonto.run/api/orders', {
 
 
 
-fetch('http://localhost:3000/api/orders', {
+fetch('https://ridouane-coffee.bonto.run/api/orders', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
