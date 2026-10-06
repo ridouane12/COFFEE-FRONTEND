@@ -315,6 +315,7 @@ const orderData = {
 };
 
 console.log('📤 Sending order to backend:', orderData);
+
 fetch('https://ridouane-coffee.bonto.run/api/orders', {
     method: 'POST',
     headers: {
@@ -3506,4 +3507,3 @@ setTimeout(function() {
     console.log('💡 Click any product image to open gallery');
     
 }, 500);
-
