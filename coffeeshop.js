@@ -365,28 +365,7 @@ fetch('https://ridouane-coffee.bonto.run/api/orders', {
 
 
 
-fetch('https://ridouane-coffee.bonto.run/api/orders', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        items: cart.map(item => ({
-            name: item.name,
-            price: item.price,
-            quantity: item.quantity
-        })),
-        total: cartTotal,
-        paymentMethod: typeof selectedPaymentMethod !== 'undefined' ? selectedPaymentMethod : 'cash'
-    })
-})
-.then(response => response.json())
-.then(data => {
-    console.log('✅ Order sent to backend!', data);
-})
-.catch(error => {
-    console.error('❌ Error sending order:', error);
-});
+
 
 
 
